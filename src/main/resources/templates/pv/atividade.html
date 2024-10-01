@@ -1,0 +1,18 @@
+<div class="row" th:id="'a'+${atividade.id}">
+    <div class="col-3">
+        <span th:text="${atividade.nome}"></span>
+    </div>
+    <div class="col-3">
+        <span th:text="${atividade.data}"></span>
+    </div>
+    <div class="col-3">
+        <span th:text="${atividade.concluida}"></span>
+    </div>
+    <div class="col-3">
+        <a class="btn btn-danger"
+           th:attr="data-codigo=${atividade.id}"
+           onclick="removerAtividade(this)">
+            X
+        </a>
+    </div>
+</div>
