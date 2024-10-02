@@ -2,10 +2,10 @@ package com.keep.keep2.service;
 
 import com.keep.keep2.model.M_Atividade;
 import com.keep.keep2.repository.R_Atividade;
-import org.hibernate.loader.ast.spi.Loadable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class S_Atividade {
@@ -36,5 +36,18 @@ public class S_Atividade {
             return m_atividade;
         }
         return null;
+    }
+
+    public static List<M_Atividade> getAtividades(){
+        return r_atividade.findAll();
+    }
+
+    public static boolean deletarAtividade(int id){
+        try{
+            r_atividade.deleteById(Long.parseLong(String.valueOf(id)));
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

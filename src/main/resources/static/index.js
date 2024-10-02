@@ -20,5 +20,23 @@ $("#btSalvar").click(cadastrarAtividade);
 
 function removerAtividade(element){
     let id = element.dataset.codigo;
-    $("#a"+id).remove();
+
+    $.ajax({
+        url: "/deletarAtividade",
+        method: "POST",
+        data:{
+            id: id
+        },
+        success: function(data){
+            alert(data.mensagem);
+            if(data.sucesso){
+                $("#a"+id).remove();
+            }
+        },
+        error: function(){
+            alert("Erro ao excluir a atividade");
+        }
+    })
+
+
 }
