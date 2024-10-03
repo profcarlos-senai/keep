@@ -37,6 +37,8 @@ function removerAtividade(element){
             alert("Erro ao excluir a atividade");
         }
     })
+}
 
-
+function duvidoSairAlgumTCC(element){
+    let id = element.dataset.codigo;
 }
