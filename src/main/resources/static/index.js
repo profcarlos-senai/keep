@@ -41,4 +41,28 @@ function removerAtividade(element){
 
 function duvidoSairAlgumTCC(element){
     let id = element.dataset.codigo;
+    let concluida = $(element).is(":checked");
+
+    $.ajax({
+        url: "/atualizarAtividade",
+        method: "post",
+        data:{
+            id: id,
+            concluida: concluida
+        },
+        success: function(data){
+            alert(data.mensagem);
+            if(data.sucesso){
+                let atividade = $("#a"+id);
+                if(concluida){
+                    atividade.addClass("tachado");
+                }else{
+                    atividade.removeClass("tachado");
+                }
+            }
+        },
+        error: function(){
+            alert('falha ao registrar a conclusão da atividade');
+        }
+    })
 }

@@ -38,4 +38,11 @@ public class C_Atividade {
         }
         return new M_Resposta(false,"Erro ao deletar a atividade");
     }
+
+    @PostMapping("/atualizarAtividade")
+    @ResponseBody
+    public M_Resposta atualizarAtividade(@RequestParam("id") Long id,
+                                         @RequestParam("concluida") boolean concluida){
+        return S_Atividade.atualizarAtividade(id,concluida);
+    }
 }

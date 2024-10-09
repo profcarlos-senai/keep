@@ -1,11 +1,13 @@
 package com.keep.keep2.service;
 
 import com.keep.keep2.model.M_Atividade;
+import com.keep.keep2.model.M_Resposta;
 import com.keep.keep2.repository.R_Atividade;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class S_Atividade {
@@ -48,6 +50,21 @@ public class S_Atividade {
             return true;
         }catch (Exception e){
             return false;
+        }
+    }
+
+    public static M_Resposta atualizarAtividade(Long id, boolean concluida){
+        try{
+            M_Atividade atividade = r_atividade.findById(id).orElse(null);
+            if(atividade != null) {
+                atividade.setConcluida(concluida);
+                r_atividade.save(atividade);
+                return new M_Resposta(true,"Atividade Atualizada");
+            }else{
+                return new M_Resposta(false, "A atividade não foi encontrada e não pode ser Atualizada");
+            }
+        }catch (Exception e){
+            return new M_Resposta(false, "Erro ao atualizar a atividade");
         }
     }
 }
