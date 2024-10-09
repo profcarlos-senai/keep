@@ -33,9 +33,10 @@ function removerAtividade(element){
             id: id
         },
         success: function(data){
-            alert(data.mensagem);
             if(data.sucesso){
                 $("#a"+id).remove();
+            }else{
+                alert(data.mensagem);
             }
         },
         error: function(){
@@ -60,14 +61,15 @@ function atualizarAtividade(element){
             concluida: concluida
         },
         success: function(data){
-            alert(data.mensagem);
             if(data.sucesso){
-                let atividade = $("#a"+id);
+                let atividade = $(".a"+id);
                 if(concluida){
                     atividade.addClass("tachado");
                 }else{
                     atividade.removeClass("tachado");
                 }
+            }else{
+                alert(data.mensagem);
             }
         },
         error: function(){

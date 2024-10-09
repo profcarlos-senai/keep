@@ -3,6 +3,7 @@ package com.keep.keep2.service;
 import com.keep.keep2.model.M_Atividade;
 import com.keep.keep2.model.M_Resposta;
 import com.keep.keep2.repository.R_Atividade;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,7 +42,7 @@ public class S_Atividade {
     }
 
     public static List<M_Atividade> getAtividades(){
-        return r_atividade.findAll();
+        return r_atividade.findAll(Sort.by(Sort.Direction.ASC, "data"));
     }
 
     public static boolean deletarAtividade(int id){
