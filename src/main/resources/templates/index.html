@@ -44,11 +44,16 @@
 </head>
 <body>
 <div class="container" id="mainContainer">
-    <div class="text-end mt-3">
-        <button id="btAdd" type="button" class="btn btn-primary"
-                data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fa-solid fa-plus"></i> Atividade
-        </button>
+    <div class="row mt-3">
+        <div class="col-6 text-end">
+            <h2>Keep</h2>
+        </div>
+        <div class="col-6 text-end">
+            <button id="btAdd" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-plus"></i> Atividade
+            </button>
+        </div>
     </div>
     <div id="activity-container" class="w-100 mt-3">
         <div th:each="atividade : ${atividades}" th:id="'a'+${atividade.id}" class="row atividade align-items-center">
