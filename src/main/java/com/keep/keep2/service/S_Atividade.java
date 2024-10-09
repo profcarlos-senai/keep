@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class S_Atividade {
@@ -17,7 +16,7 @@ public class S_Atividade {
         this.r_atividade = r_atividade;
     }
 
-    public static M_Atividade cadastrarAtividade(String nome, String data){
+    public static M_Atividade cadastrarAtividade(String nome, String data, Long id){
         boolean podeSalvar = true;
         M_Atividade m_atividade = new M_Atividade();
 
@@ -33,6 +32,7 @@ public class S_Atividade {
         }
 
         if(podeSalvar){
+            m_atividade.setId(id);
             m_atividade.setConcluida(false);
             m_atividade = r_atividade.save(m_atividade);
             return m_atividade;
@@ -53,18 +53,17 @@ public class S_Atividade {
         }
     }
 
-    public static M_Resposta atualizarAtividade(Long id, boolean concluida){
+    public static M_Resposta atualizarAtividade(Long id, boolean concluida, String data, String nome){
         try{
-            M_Atividade atividade = r_atividade.findById(id).orElse(null);
-            if(atividade != null) {
-                atividade.setConcluida(concluida);
-                r_atividade.save(atividade);
-                return new M_Resposta(true,"Atividade Atualizada");
-            }else{
-                return new M_Resposta(false, "A atividade não foi encontrada e não pode ser Atualizada");
-            }
+            M_Atividade atividade = new M_Atividade();
+            atividade.setId(id);
+            atividade.setNome(nome);
+            atividade.setData(LocalDate.parse(data));
+            atividade.setConcluida(concluida);
+            r_atividade.save(atividade);
+            return new M_Resposta(true, "Atividade atualizada com sucesso!");
         }catch (Exception e){
-            return new M_Resposta(false, "Erro ao atualizar a atividade");
+            return new M_Resposta(false, "Erro ao atualizar a atividade!");
         }
     }
 }

@@ -33,6 +33,10 @@
         .tachado {
             text-decoration: line-through;
         }
+        .atividade{
+            padding: 5px;
+            border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -44,7 +48,7 @@
         </button>
     </div>
     <div id="activity-container" class="w-100 mt-3">
-        <div th:each="atividade : ${atividades}" th:id="'a'+${atividade.id}" th:class="|row ${atividade.concluida ? 'tachado' : ''}|">
+        <div th:each="atividade : ${atividades}" th:id="'a'+${atividade.id}" th:class="|row atividade ${atividade.concluida ? 'tachado' : ''}|">
             <div class="col-3">
                 <span th:text="${atividade.nome}"></span>
             </div>
@@ -54,9 +58,10 @@
             <div class="col-3">
                 <div class="form-check">
                     <input class="form-check-input"
-                           th:attr="data-codigo=${atividade.id}"
-                           type="checkbox" value=""
-                           onchange="duvidoSairAlgumTCC(this)" th:checked="${atividade.concluida}">
+                           th:attr="data-codigo=${atividade.id}, data-nome=${atividade.nome}, data-data=${atividade.data}"
+                           type="checkbox"
+                           onchange="atualizarAtividade(this)"
+                           th:checked="${atividade.concluida}">
                 </div>
             </div>
             <div class="col-3">
@@ -66,8 +71,9 @@
                     X
                 </a>
                 <a class="btn btn-warning"
-                   th:attr="data-codigo=${atividade.id}"
-                   onclick="">
+                   data-bs-toggle="modal" data-bs-target="#exampleModal"
+                   th:attr="data-codigo=${atividade.id}, data-nome=${atividade.nome}, data-data=${atividade.data}"
+                   onclick="loadModal(this)">
                     E
                 </a>
             </div>
@@ -84,6 +90,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div id="divId" class="col-12 d-none">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="spId">Id</span>
+                            <input id="id" type="text" class="form-control col-1" placeholder="Id Atividade"
+                                   aria-describedby="spId" disabled>
+                        </div>
+                    </div>
                     <div class="col-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="spAtividade">Atividade</span>

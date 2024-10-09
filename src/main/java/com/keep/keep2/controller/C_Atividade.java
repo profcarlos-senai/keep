@@ -21,8 +21,9 @@ public class C_Atividade {
     @PostMapping("/cadastrar")
     public String cadastrar(@RequestParam("atividade") String atividade,
                             @RequestParam("data") String data,
+                            @RequestParam(name = "id",required = false) Long id,
                             Model model){
-        M_Atividade m_atividade = S_Atividade.cadastrarAtividade(atividade, data);
+        M_Atividade m_atividade = S_Atividade.cadastrarAtividade(atividade, data, id);
         model.addAttribute("atividade",m_atividade);
         if(m_atividade != null){
             return "pv/atividade";
@@ -42,7 +43,9 @@ public class C_Atividade {
     @PostMapping("/atualizarAtividade")
     @ResponseBody
     public M_Resposta atualizarAtividade(@RequestParam("id") Long id,
-                                         @RequestParam("concluida") boolean concluida){
-        return S_Atividade.atualizarAtividade(id,concluida);
+                                         @RequestParam("concluida") boolean concluida,
+                                         @RequestParam("data") String data,
+                                         @RequestParam("nome") String nome){
+        return S_Atividade.atualizarAtividade(id,concluida,data,nome);
     }
 }
