@@ -30,9 +30,6 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
-        .tachado {
-            text-decoration: line-through;
-        }
         .atividade{
             padding: 5px;
             border-bottom: 1px solid rgb(0, 0, 0, 0.2);
@@ -70,10 +67,10 @@
                 </div>
             </div>
             <div class="col-7">
-                <span th:class="|a${atividade.id} ${atividade.concluida ? 'tachado' : ''}|" th:text="${atividade.nome}"></span>
+                <span th:text="${atividade.nome}"></span>
             </div>
             <div class="col-2 text-center">
-                <span th:class="|a${atividade.id} ${atividade.concluida ? 'tachado' : ''}|" th:text="${#temporals.format(atividade.data, 'dd/MM/yyyy')}"></span>
+                <span th:text="${#temporals.format(atividade.data, 'dd/MM/yyyy')}"></span>
             </div>
             <div class="col-2 text-end">
                 <a class="btn btn-danger"
