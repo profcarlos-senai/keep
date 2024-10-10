@@ -65,8 +65,10 @@ function atualizarAtividade(element){
                 let atividade = $(".a"+id);
                 if(concluida){
                     atividade.addClass("tachado");
+                    $("#a"+id).addClass("done");
                 }else{
                     atividade.removeClass("tachado");
+                    $("#a"+id).removeClass("done");
                 }
             }else{
                 alert(data.mensagem);
