@@ -21,6 +21,7 @@ function cadastrarAtividade(){
         }
     });
 }
+
 $("#btSalvar").click(cadastrarAtividade);
 
 function removerAtividade(element){
@@ -42,7 +43,7 @@ function removerAtividade(element){
         error: function(){
             alert("Erro ao excluir a atividade");
         }
-    })
+    });
 }
 
 function atualizarAtividade(element){
@@ -75,7 +76,7 @@ function atualizarAtividade(element){
         error: function(){
             alert('falha ao registrar a conclusão da atividade');
         }
-    })
+    });
 }
 
 function loadModal(element){
