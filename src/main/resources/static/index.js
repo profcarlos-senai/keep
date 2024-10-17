@@ -2,17 +2,23 @@ function cadastrarAtividade(){
     let atividade = $("#atividade").val();
     let data = $("#data").val();
     let id = $("#id").val();
+    let concluida = $("#check"+id).is(':checked');
+
     $.ajax({
         url: "/cadastrar",
         method: "post",
         data: {
             id: id,
             atividade: atividade,
-            data: data
+            data: data,
+            concluida: concluida
         },
-        success: function(data){
+        success: function(response){
             if(id==""){
-                $("#activity-container").append(data);
+                $("#activity-container").append(response);
+            }else{
+                $("#data"+id).text(new Date(data+"T00:00:00").toLocaleDateString());
+                $("#nome"+id).text(atividade);
             }
             $("#exampleModal").modal('hide');
         },
@@ -21,7 +27,6 @@ function cadastrarAtividade(){
         }
     });
 }
-
 $("#btSalvar").click(cadastrarAtividade);
 
 function removerAtividade(element){
@@ -96,4 +101,5 @@ $("#exampleModal").on('hidden.bs.modal', function(){
     $("#divId").addClass("d-none");
     $("#atividade").val('');
     $("#data").val('');
+    $("#id").val('');
 });

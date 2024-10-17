@@ -1,18 +1,30 @@
-<div class="row" th:id="'a'+${atividade.id}">
-    <div class="col-3">
+<div th:id="'a'+${atividade.id}" th:class="|row atividade align-items-center ${atividade.concluida ? 'done' : ''}|">
+    <div class="col-1">
+        <div class="form-check d-flex justify-content-center">
+            <input class="form-check-input"
+                   th:attr="data-codigo=${atividade.id}, data-nome=${atividade.nome}, data-data=${atividade.data}"
+                   type="checkbox"
+                   onchange="atualizarAtividade(this)"
+                   th:checked="${atividade.concluida}">
+        </div>
+    </div>
+    <div class="col-7">
         <span th:text="${atividade.nome}"></span>
     </div>
-    <div class="col-3">
-        <span th:text="${atividade.data}"></span>
+    <div class="col-2 text-center">
+        <span th:text="${#temporals.format(atividade.data, 'dd/MM/yyyy')}"></span>
     </div>
-    <div class="col-3">
-        <span th:text="${atividade.concluida}"></span>
-    </div>
-    <div class="col-3">
+    <div class="col-2 text-end">
         <a class="btn btn-danger"
            th:attr="data-codigo=${atividade.id}"
-           onclick="removerAtividade(this)">
-            X
+           onclick="removerAtividade(this)" title="excluir">
+            <i class="fa-solid fa-trash-can"></i>
+        </a>
+        <a class="btn btn-warning"
+           data-bs-toggle="modal" data-bs-target="#exampleModal"
+           th:attr="data-codigo=${atividade.id}, data-nome=${atividade.nome}, data-data=${atividade.data}"
+           onclick="loadModal(this)" title="editar">
+            <i class="fa-solid fa-pencil"></i>
         </a>
     </div>
 </div>

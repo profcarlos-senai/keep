@@ -59,7 +59,8 @@
         <div th:each="atividade : ${atividades}" th:id="'a'+${atividade.id}" th:class="|row atividade align-items-center ${atividade.concluida ? 'done' : ''}|">
             <div class="col-1">
                 <div class="form-check d-flex justify-content-center">
-                    <input class="form-check-input"
+                    <input th:id="${'check' + atividade.id}"
+                           class="form-check-input"
                            th:attr="data-codigo=${atividade.id}, data-nome=${atividade.nome}, data-data=${atividade.data}"
                            type="checkbox"
                            onchange="atualizarAtividade(this)"
@@ -67,10 +68,10 @@
                 </div>
             </div>
             <div class="col-7">
-                <span th:text="${atividade.nome}"></span>
+                <span th:id="${'nome'+atividade.id}" th:text="${atividade.nome}"></span>
             </div>
             <div class="col-2 text-center">
-                <span th:text="${#temporals.format(atividade.data, 'dd/MM/yyyy')}"></span>
+                <span th:id="${'data'+atividade.id}" th:text="${#temporals.format(atividade.data, 'dd/MM/yyyy')}"></span>
             </div>
             <div class="col-2 text-end">
                 <a class="btn btn-danger"

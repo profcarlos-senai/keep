@@ -22,8 +22,9 @@ public class C_Atividade {
     public String cadastrar(@RequestParam("atividade") String atividade,
                             @RequestParam("data") String data,
                             @RequestParam(name = "id",required = false) Long id,
+                            @RequestParam("concluida") boolean concluida,
                             Model model){
-        M_Atividade m_atividade = S_Atividade.cadastrarAtividade(atividade, data, id);
+        M_Atividade m_atividade = S_Atividade.cadastrarAtividade(atividade, data, id, concluida);
         model.addAttribute("atividade",m_atividade);
         if(m_atividade != null){
             return "pv/atividade";

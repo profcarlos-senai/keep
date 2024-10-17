@@ -17,7 +17,7 @@ public class S_Atividade {
         this.r_atividade = r_atividade;
     }
 
-    public static M_Atividade cadastrarAtividade(String nome, String data, Long id){
+    public static M_Atividade cadastrarAtividade(String nome, String data, Long id, boolean concluida){
         boolean podeSalvar = true;
         M_Atividade m_atividade = new M_Atividade();
 
@@ -34,7 +34,7 @@ public class S_Atividade {
 
         if(podeSalvar){
             m_atividade.setId(id);
-            m_atividade.setConcluida(false);
+            m_atividade.setConcluida(concluida);
             m_atividade = r_atividade.save(m_atividade);
             return m_atividade;
         }
