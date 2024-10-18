@@ -12,6 +12,29 @@ public class M_Atividade {
     private Long id;
     private String nome;
     private LocalDate data;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        M_Atividade that = (M_Atividade) o;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getNome() != null ? !getNome().equals(that.getNome()) : that.getNome() != null) return false;
+        if (getData() != null ? !getData().equals(that.getData()) : that.getData() != null) return false;
+        return getConcluida() != null ? getConcluida().equals(that.getConcluida()) : that.getConcluida() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getNome() != null ? getNome().hashCode() : 0);
+        result = 31 * result + (getData() != null ? getData().hashCode() : 0);
+        result = 31 * result + (getConcluida() != null ? getConcluida().hashCode() : 0);
+        return result;
+    }
+
     private Boolean concluida;
 
     public Long getId() {
